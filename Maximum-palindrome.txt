@@ -1,0 +1,103 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+vector<int> strToArr(string);
+
+void solve(string str, vector<int> arr)
+{
+    int temp[str.length()] = {0};
+    for (int i = 0; i < str.length(); ++i)
+        if (str[i] != '*')
+    {
+        {
+            int count = 0;
+            char key = str[i];
+            for (int j = i; j < str.length(); ++j)
+            {
+                if (key == str[j])
+                {
+                    count++;
+                    str[j] = '*';
+                }
+            }
+            temp[i] = count;
+        }
+    }
+
+    int factCount = 0;
+    int count = 0;
+
+    for(int i : temp)
+    {
+        if (i > 1)
+        {
+            factCount += (i / 2);
+            count += i % 2;
+        }
+        else if (i == 1)
+        {
+            count++;
+        }
+    }
+
+    int factorial = 1;
+    for (int i = 1; i <= factCount; ++i)
+    {
+        factorial *= i; 
+    }
+
+    cout << factorial + count << endl;
+}
+
+int main()
+{
+    string str;
+    int testCases = 0;
+    string testcase; 
+
+    getline(cin >> ws, str);
+    cin >> testCases;
+
+    for (int i = 0; i < testCases; ++i)
+    {
+        getline(cin >> ws, testcase);
+        vector<int> InpArr = strToArr(testcase);
+        solve(str, InpArr); 
+    }
+    // n = inp1[2] - '0';
+    return 0;
+}
+
+vector<int> strToArr(string str)
+{
+    string temp;
+    vector<int> arr;
+
+    for (int i = 0; i < str.length(); ++i)
+    {
+        if (str[i] != ' ')
+        {
+            temp += str[i];
+        }
+        else
+        {
+            int x = stoi(temp);
+            arr.push_back(x);
+            temp = "";
+        }
+    }
+
+    int x = stoi(temp);
+    arr.push_back(x);
+
+    return arr;
+}
+
+
+
+
+
+

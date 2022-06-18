@@ -10,6 +10,13 @@ void solve(string pd, int n)
 {
     int i = 0;
     int j = pd.length()-1;
+    
+    if(pd.length() < 2)
+    {
+        cout << -1 << endl;
+        return;
+    }
+    
     vector<int> ind;
     while(i < j && n > 0)
     {
@@ -36,14 +43,16 @@ void solve(string pd, int n)
     {
         for(int k : ind)
         {
-            if(i == k || j == k)
+            if((i == k && pd[i] < '9') || (j == k && pd[j] < '9'))
             {
+                cout << "if";        
                 pd[i] = '9';
                 pd[j] = '9';
                 n--;  
             }
-            else if(n > 1)
+            else if(n > 1 && pd[i] < '9')
             {
+                cout << "else";
                 pd[i] = '9';
                 pd[j] = '9';
                 n -= 2;
@@ -52,6 +61,7 @@ void solve(string pd, int n)
         i++;
         j--;
     }
+    
     
     i = 0;
     j = pd.length()-1;
@@ -112,7 +122,7 @@ vector<int> strToArr(string str)
 /*
 Sample Input
 ---
-4 1
+4 1u
 3943
 ---
 6 3
@@ -120,4 +130,7 @@ Sample Input
 ---
 4 1
 0011
+---
+6 2
+932239
 */

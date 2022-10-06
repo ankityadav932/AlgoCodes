@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// void createPascalTriangle(int n)
+vector<vector<int>> createPascalTriangle(int n)
+{
+	vector<int> row;
+	vector<vector<int>> pascalTriangle;
+
+	row = {1};
+	pascalTriangle.push_back(row);
+	row = {1,2,1};
+	pascalTriangle.push_back(row);
+
+	for (int i = 3; i <= n; ++i)
+	{
+		vector<int> temp;
+		temp.push_back(1);
+
+		for (int j = 1; j < row.size(); ++j)
+		{
+			int sum = row[j] + row[j-1];
+			temp.push_back(sum);
+		}
+
+		temp.push_back(1);
+		row = temp;
+		pascalTriangle.push_back(row);
+	}
+
+	return pascalTriangle;
+}
+
+int main()
+{
+	int n;
+	vector<vector<int>> pascalTriangle;
+
+	cin >> n;
+	
+	pascalTriangle = createPascalTriangle(n); 
+	return 0;
+}
